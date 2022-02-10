@@ -1,13 +1,13 @@
-import React from 'react';
-import styled from 'styled-components/macro';
+import React from "react";
+import styled from "styled-components/macro";
 
-import { QUERIES, WEIGHTS } from '../../constants';
-import Logo from '../Logo';
-import Icon from '../Icon';
-import UnstyledButton from '../UnstyledButton';
-import SuperHeader from '../SuperHeader';
-import MobileMenu from '../MobileMenu';
-import VisuallyHidden from '../VisuallyHidden';
+import { QUERIES, WEIGHTS } from "../../constants";
+import Logo from "../Logo";
+import Icon from "../Icon";
+import UnstyledButton from "../UnstyledButton";
+import SuperHeader from "../SuperHeader";
+import MobileMenu from "../MobileMenu";
+import VisuallyHidden from "../VisuallyHidden";
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -20,12 +20,25 @@ const Header = () => {
           <Logo />
         </LogoWrapper>
         <DesktopNav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
+          <NavLink href="/sale">
+            Sale
+            {/* <NavName data-hover="Sale">Sale</NavName> */}
+          </NavLink>
+          <NavLink href="/new">
+            <NavName data-hover="New Releases">New&nbsp;Releases</NavName>
+          </NavLink>
+          <NavLink href="/men">
+            <NavName data-hover="Men">Men</NavName>
+          </NavLink>
+          <NavLink href="/women">
+            <NavName data-hover="Women">Women</NavName>
+          </NavLink>
+          <NavLink href="/kids">
+            <NavName data-hover="Kids">Kids</NavName>
+          </NavLink>
+          <NavLink href="/collections">
+            <NavName data-hover="Collections">Collections</NavName>
+          </NavLink>
         </DesktopNav>
         <MobileActions>
           <ShoppingBagButton>
@@ -121,8 +134,51 @@ const NavLink = styled.a`
   color: var(--color-gray-900);
   font-weight: ${WEIGHTS.medium};
 
+  position: relative;
+  /* overflow: hidden; */
+  /* padding: 0 4px; */
+  height: 1.125em;
+  transform: translateY(0);
+
   &:first-of-type {
     color: var(--color-secondary);
+  }
+
+  &:hover span {
+    /* transform: translateY(-100%); */
+  }
+
+  &:hover::after {
+    height: 3px;
+    opacity: 1;
+    transform: translateY(3px);
+  }
+
+  &::after {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    content: "";
+    opacity: 0;
+    transition: height 0.3s, opacity 0.3s, transform 0.3s;
+    transform: translateY(-3px);
+  }
+`;
+
+const NavName = styled.span`
+  display: inline-block;
+  transition: transform 0.3s;
+
+  &::before {
+    display: none;
+    position: absolute;
+    top: 100%;
+    content: attr(data-hover);
+    font-weight: ${WEIGHTS.bold};
+    transform: translate3d(0, 0, 0);
   }
 `;
 

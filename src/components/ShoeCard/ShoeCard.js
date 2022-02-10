@@ -73,17 +73,6 @@ const Wrapper = styled.article`
   position: relative;
 `;
 
-const zoom = keyframes`
-  from {
-   
-
-  }
-  to {
-   
-    
-  }
-`;
-
 const ImageWrapper = styled.div`
   overflow: hidden;
   background-color: #f5f5f5;
@@ -97,10 +86,17 @@ const ImageWrapper = styled.div`
 
 const Image = styled.img`
   width: 100%;
+  will-change: transform;
   transition: transform 400ms ease-in-out;
   transform-origin: bottom center;
-  will-change: transform;
+
   transform: scale(1);
+
+  &:hover + div {
+    transform: scale(1.4) rotate(5deg);
+    transition: transform 100ms ease-in-out;
+    transform-origin: bottom center;
+  }
 `;
 
 const Row = styled.div`
@@ -140,6 +136,13 @@ const Flag = styled.div`
   font-weight: ${WEIGHTS.bold};
   color: var(--color-white);
   border-radius: 2px;
+
+  will-change: transform;
+  transition: transform 400ms ease-in-out;
+  transform-origin: bottom center;
+
+  transform: scale(1);
+  animation-delay: 1300ms;
 `;
 
 const SaleFlag = styled(Flag)`
